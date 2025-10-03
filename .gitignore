@@ -1,0 +1,16 @@
+# build artifacts
+*.o
+*.a
+*.so
+sensorhub
+
+# runtime data/logs
+data/
+*.log
+
+# editor / OS
+.vscode/
+.DS_Store
+
+# tests artifacts
+tests/*.out
