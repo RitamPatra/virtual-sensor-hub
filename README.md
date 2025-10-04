@@ -57,3 +57,7 @@ Run this automated test after building:
 # or
 ./tests/run_tests.sh 8        # specify duration in seconds
 ```
+
+## Architecture Diagram
+
+![Image](https://github.com/user-attachments/assets/dcc12058-dbc7-4ea7-bd95-cac6300ce836)
