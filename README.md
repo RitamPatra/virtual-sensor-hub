@@ -9,7 +9,8 @@ This is a multi-threaded C program that simulates sensors, produces time-stamped
 - `Makefile` - one-command build (make)
 - `data/hub.log` - runtime outputs
 - `tools/check_log.py` - Python validator for data/hub.log
-- `tests/run_tests.sh` — orchestrated test harness (runs app + validator)
+- `tests/run_tests.sh` - orchestrated test harness (runs app + validator)
+- `tools/parse_logs.py` - generates charts and a CSV summarizing the output
 
 
 ## Design
@@ -24,6 +25,9 @@ This is a multi-threaded C program that simulates sensors, produces time-stamped
 
 - **Logging & verification**  
   All samples and alerts are appended to `data/hub.log` (human-readable framed lines). A Python validator (`tools/check_log.py`) inspects the log to verify expected sample counts and alerts for automated testing.
+
+- **Analysis & Visualizations**  
+  The logs are analysed by `tools/parse_logs.py` and visualizations (histogram + timseries) are generated for all three sensors, along with a timeline of alerts and a CSV summarizing the sensor readings.
 
 ## Prerequisites
 Run in **WSL2 (Ubuntu)** or any Linux environment with:
@@ -50,13 +54,28 @@ To run for a fixed duration:
 
 The program writes trace lines to data/hub.log (SAMPLE and ALERT framed records).
 
-## Test Harness
+## Testing & Analysis
 Run this automated test after building:
 ```bash
 ./tests/run_tests.sh          # default duration 6s
 # or
 ./tests/run_tests.sh 8        # specify duration in seconds
 ```
+
+Run this to perform the analysis after the log file has been generated:
+```bash
+python3 tools/parse_logs.py data/hub.log --outdir outputs --window 5
+```
+
+## Visualizations
+The following are some sample outputs obtained after executing the program for 35 seconds.
+| Histograms | Timeseries |
+|:-:|:-:|
+| ![Temperature Histogram](https://github.com/user-attachments/assets/0cca0a12-be54-4113-ba74-2908ce29846b) | ![Temperature Timeseries](https://github.com/user-attachments/assets/3d94f572-7b07-4e85-ac2a-6194163b431b) |
+| ![Humidity Histogram](https://github.com/user-attachments/assets/d84cdae0-f63f-4438-9a3d-2fa937241607) | ![Humidity Timeseries](https://github.com/user-attachments/assets/ed9d9900-b7d7-4635-aab4-21ea25275e7b) |
+| ![Pressure Histogram](https://github.com/user-attachments/assets/7cb4e5ce-7925-4258-8271-3fc43d604fc4) | ![Pressure Timeseries](https://github.com/user-attachments/assets/9f842e65-4c93-4033-9b43-ebe1b5561d53) |
+
+![Alerts Timeline](https://github.com/user-attachments/assets/645daf58-381a-490d-ac4e-a5dbcfe4ee73)
 
 ## Architecture Diagram
 
