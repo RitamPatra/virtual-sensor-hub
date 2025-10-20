@@ -79,4 +79,4 @@ The following are some sample outputs obtained after executing the program for 3
 
 ## Architecture Diagram
 
-![Image](https://github.com/user-attachments/assets/dcc12058-dbc7-4ea7-bd95-cac6300ce836)
+![Image](https://github.com/user-attachments/assets/2aff52fe-90f5-4860-80a2-274cbbff721f)
